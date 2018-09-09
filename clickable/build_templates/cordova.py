@@ -35,15 +35,10 @@ class CordovaClickable(CMakeClickable):
             cordova_docker_image = "beevelop/cordova:v7.0.0"  # TODO add cordova to the clickable image
             command = "cordova platform add ubuntu"
 
-            # Can't use self.run_container_command because need to set -e HOME=/tmp
-            wrapped_command = 'docker run -v {cwd}:{cwd} -w {cwd} -u {uid}:{uid} -e HOME=/tmp --rm -i {img} {cmd}'.format(
-                cwd=self.cwd,
-                uid=os.getuid(),
-                img=cordova_docker_image,
-                cmd=command
-            )
-
-            subprocess.check_call(shlex.split(wrapped_command))
+            old_docker_image = self.docker_image
+            self.docker_image = cordova_docker_image
+            self.run_container_command(command, use_dir=False)
+            self.docker_image = old_docker_image
 
         self.config.dir = self._dirs['prefix']
 
