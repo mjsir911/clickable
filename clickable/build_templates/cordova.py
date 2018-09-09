@@ -43,6 +43,7 @@ class CordovaClickable(CMakeClickable):
             else:
                 del self.docker_image
 
+            os.makedirs(self._dirs["build"], exist_ok=True)
 
         self.config.dir = self._dirs['prefix']
 
