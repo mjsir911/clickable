@@ -56,6 +56,7 @@ RUN apt-get -y --no-install-recommends dist-upgrade && \
         libicu-dev:armhf \
         qtfeedback5-dev:armhf \
         qtsystems5-dev:armhf \
+        qtpositioning5-dev:armhf \
         click-reviewers-tools && \
     apt-get clean
 
