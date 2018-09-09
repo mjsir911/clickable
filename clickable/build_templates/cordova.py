@@ -111,7 +111,7 @@ class CordovaClickable(CMakeClickable):
         apparmor_file = os.path.join(self._dirs['build'], 'apparmor.json')
         with open(apparmor_file, 'r') as apparmor_reader:
             apparmor = json.load(apparmor_reader)
-            apparmor["policy_version"] = 1.3
+            apparmor["policy_version"] = 16.04
 
             if 'webview' not in apparmor["policy_groups"]:
                 apparmor["policy_groups"].append("webview")
