@@ -104,14 +104,14 @@ class CordovaClickable(CMakeClickable):
         with open(self.find_manifest(), 'r') as manifest_reader:
             manifest = json.load(manifest_reader)
             manifest['architecture'] = self.build_arch
-            manifest['framework'] = self.config.sdk
+            manifest['framework'] = 'ubuntu-sdk-{}'.format(self.config.sdk)
             with open(self.find_manifest(), 'w') as manifest_writer:
                 json.dump(manifest, manifest_writer, indent=4)
 
         apparmor_file = os.path.join(self._dirs['build'], 'apparmor.json')
         with open(apparmor_file, 'r') as apparmor_reader:
             apparmor = json.load(apparmor_reader)
-            apparmor["policy_version"] = 16.04
+            apparmor["policy_version"] = float(self.config.sdk)
 
             if 'webview' not in apparmor["policy_groups"]:
                 apparmor["policy_groups"].append("webview")
