@@ -28,9 +28,7 @@ class CordovaClickable(CMakeClickable):
         self.temp = self._dirs['build']
 
         if not os.path.isdir(self.platform_dir):
-            # fail when not using docker, need it anyways
-            if self.config.container_mode or self.config.lxd or self.config.chroot:
-                if not shutil.which("cordova"):
+            if (self.config.container_mode or self.config.lxd or self.config.chroot) and not shutil.which("cordova"):
                     print_error('Docker is required to intialize cordova directories. Enable docker or run "cordova platform add ubuntu" manually to remove this message')
                     sys.exit(1)
 
