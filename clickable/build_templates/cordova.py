@@ -35,10 +35,14 @@ class CordovaClickable(CMakeClickable):
             cordova_docker_image = "beevelop/cordova:v7.0.0"  # TODO add cordova to the clickable image
             command = "cordova platform add ubuntu"
 
-            old_docker_image = self.docker_image
+            old_docker_image = (hasattr(self, "docker_image"), getattr(self, "docker_image", None))
             self.docker_image = cordova_docker_image
             self.run_container_command(command, use_dir=False)
-            self.docker_image = old_docker_image
+            if old_docker_image[0]:
+                self.docker_image = old_docker_image[1]
+            else:
+                del self.docker_image
+
 
         self.config.dir = self._dirs['prefix']
 
