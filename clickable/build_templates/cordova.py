@@ -20,8 +20,8 @@ class CordovaClickable(CMakeClickable):
         self.platform_dir = os.path.join(self.cwd, 'platforms/ubuntu/')
 
         self._dirs = {
-            'build': '{}/{}/{}/build/' .format(self.platform_dir, self.config.sdk, self.build_arch),
-            'prefix': '{}/{}/{}/prefix/'.format(self.platform_dir, self.config.sdk, self.build_arch),
+            'build': '{}/{}/{}/build/' .format(self.platform_dir, 'ubuntu-sdk-{}'.format(self.config.sdk), self.build_arch),
+            'prefix': '{}/{}/{}/prefix/'.format(self.platform_dir, 'ubuntu-sdk-{}'.format(self.config.sdk), self.build_arch),
             'make': '{}/build'.format(self.platform_dir)
         }
 
